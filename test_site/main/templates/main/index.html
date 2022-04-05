@@ -1,0 +1,24 @@
+
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    {% if latest_articles %}
+
+    {% for article in latest_articles %}
+    <div class ="container">
+        <div class="row pin">
+        <a href="{% url 'main:detailCybersport' article.id %}">{{article.article_title}}</a>
+            <p>{{article.article_text}}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+        No articles were found! :c
+    {% endif %}
+
+{% endblock %}
+
+<!--{% url 'main:detail' a.id %}-->
+<!--/it/{{article.article_id}}-->

@@ -1,0 +1,70 @@
+#header{
+    min-height: 50px;
+    text-align:center;
+    margin-top: 5px;
+}
+#footer{
+    position:relative;
+    bottom:0%;
+    width:100%;
+    text-align:center;
+}
+#content{
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+#logo{
+    max-width: 64px;
+}
+/*el*/
+body{
+    color: black;
+    font-family: ff-tisa-sans-web-pro, sans-serif;
+    font-style: normal;
+    font-weight: 100;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.bg{
+
+}
+h1{
+    color: black;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+h4{
+    color: black;
+}
+h3{
+    text-align: center;
+    color: black;
+}
+/*class*/
+.image{
+
+    max-width: 300px;
+}
+.pin{
+    border: 1px solid #dddd;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    text-align: center;
+    width:min-content;
+}
+.line{
+    position: relative;
+    background-color: black;
+    height: 1px;
+    width: 100%;
+    margin: 3px auto 3px;
+}
+.bar{
+    position: relative;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
