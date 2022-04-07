@@ -5,15 +5,30 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 app_name = 'main'
 
 urlpatterns = [
-    path('cybersport', views.index),
-    path('it', views.it),
-    path('cryptocurrency', views.crypto),
+    # EN
 
-    path('cryptocurrency/'+'<int:article_id>', views.detail, name='detailCrypto'),
+    path('en/cybersport', views.index),
+    path('en/it', views.it),
+    path('en/cryptocurrency', views.crypto),
 
-    path('it/'+'<int:article_id>', views.detail, name='detailIT'),
+    path('en/cryptocurrency/'+'<int:article_id>', views.detail, name='detailCrypto'),
 
-    path('cybersport/'+'<int:article_id>', views.detail, name='detailCybersport')
+    path('en/it/'+'<int:article_id>', views.detail, name='detailIT'),
+
+    path('en/cybersport/'+'<int:article_id>', views.detail, name='detailCybersport'),
+
+    # RU
+
+    path('ru/cybersport', views.indexru),
+    path('ru/it', views.itru),
+    path('ru/cryptocurrency', views.cryptoru),
+
+    path('ru/cryptocurrency/' + '<int:article_id>', views.detailru, name='detailCryptoRu'),
+
+    path('ru/it/' + '<int:article_id>', views.detailru, name='detailITRu'),
+
+    path('ru/cybersport/' + '<int:article_id>', views.detailru, name='detailCybersportRu')
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()

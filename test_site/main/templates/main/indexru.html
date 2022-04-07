@@ -1,12 +1,12 @@
 
-{% extends 'main/base.html' %}
+{% extends 'main/baseru.html' %}
 
 {% block content %}
 
     {% if latest_articles %}
 
     <div class ="container a">
-        <h2>Cybersport News</h2>
+        <h2>Новости киберспорта</h2>
         {% for article in latest_articles %}
         <div class="pin container-fluid">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Mallard2.jpg" class="">
@@ -17,7 +17,7 @@
     </div>
 
     {% else %}
-        No articles were found! :c
+        Статьи не были найдены :с
     {% endif %}
 
 {% endblock %}

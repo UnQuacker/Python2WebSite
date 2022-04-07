@@ -1,4 +1,4 @@
-{% extends 'main/base.html' %}
+{% extends 'main/baseru.html' %}
 
 {% block content %}
 
@@ -6,35 +6,35 @@
 
 
 {% if latest_articles %}
-    
-    
+
+
     <div class ="container a">
-        <h2>Crypto News</h2>
+        <h2>Новости криптовалют</h2>
         {% for article in latest_articles %}
         <div class="pin container-fluid">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Mallard2.jpg" class="">
-        <h4 class=""><a href="{% url 'main:detailCrypto' article.id %}">{{article.article_title}}</a></h4>
+        <h4 class=""><a href="{% url 'main:detailCryptoRu' article.id %}">{{article.article_title}}</a></h4>
             <p>{{article.article_text}}</p>
         </div>
         {% endfor %}
     </div>
-    
 
-    
 
-    {% else %} 
-        No articles were found! :c
+
+
+    {% else %}
+        Статьи не были найдены :с
     {% endif %}
 
     <div class ="container a">
-        <h2>Crypto course</h2>
+        <h2>Курсы криптовалют</h2>
     {% for crypto in api_data %}
     <div class = "container crc">
-    <h4 class="">{{crypto.name}} <img src="{{crypto.image}}" class=""></h4> 
-    <p>price:{{crypto.current_price}}</p>
-    <p>market cap:{{crypto.market_cap}}</p>
+    <h4 class="">{{crypto.name}} <img src="{{crypto.image}}" class=""></h4>
+    <p>цена:{{crypto.current_price}}</p>
+    <p>рыночная капитализация:{{crypto.market_cap}}</p>
     </div>
     {% endfor %}
 </div>
-    
+
     {% endblock %}
