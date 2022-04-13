@@ -12,6 +12,7 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Mallard2.jpg" class="">
         <h4 class=""><a href="{% url 'main:detailCybersport' article.id %}">{{article.article_title}}</a></h4>
             <p>{{article.article_text}}</p>
+            <p>{{article.publishing_date}}</p>
         </div>
         {% endfor %}
     </div>
@@ -19,7 +20,14 @@
     {% else %}
         Статьи не были найдены :с
     {% endif %}
-
+<div id="footer" class="row">
+        <div>
+            We are a developers
+        </div>
+        <div class="">© 2022 Copyright:
+            <a href="#">GACHISTY</a>
+        </div>
+    </div>
 {% endblock %}
 
 <!--{% url 'main:detail' a.id %}-->

@@ -17,6 +17,8 @@ urlpatterns = [
 
     path('en/cybersport/'+'<int:article_id>', views.detail, name='detailCybersport'),
 
+    path('en/coding', views.compile, name='compile'),
+
     # RU
 
     path('ru/cybersport', views.indexru),

@@ -4,15 +4,16 @@ body{
     font-style: normal;
     font-weight: 100;
     color: black;
+    max-height: min-content;
 }
 
 #footer{
-    position:absolute;
-    top:200%;
+    position:relative;
     bottom:0;
     width:100%;
     text-align:center;
     background-color: beige;
+    margin:0;
 }
 
 #logo{
