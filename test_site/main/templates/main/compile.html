@@ -1,15 +1,21 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-<form action = "{% url 'main:compile' %}" method="POST">
+<form class="form-group" action = "{% url 'main:compile' %}" method="POST">
     {% csrf_token %}
-    <textarea type="text" name="code" cols = 80 rows = 20></textarea>
-    <button type="submit">submit code</button>
+    <div class="input" ><h4>Input</h4><textarea class="form-control" type="text" name="code" cols = 80 rows = 20 >{{user_code}}</textarea>
+        <button class="button" type="submit">submit code</button>
+    
+    </div>
+    
 </form>
-<textarea cols = 80 rows = 20>Output:{{output.output}}</textarea>
-<p>Status Code: {{output.statusCode}}</p>
-<p>CPU time: {{output.cpuTime}}</p>
-<p>output.error</p>
-{% endblock %}
+<div class="output"><h4>Output</h4><textarea class="form-control" cols = 80 rows = 20>{{output.output}}</textarea>
+    
+    <p>Status Code: {{output.statusCode}}</p>
+    <p>CPU time: {{output.cpuTime}}</p>
+    <p>output.error</p>
 
+</div>
+
+{% endblock %}
 <!--test-->

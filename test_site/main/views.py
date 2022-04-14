@@ -37,8 +37,9 @@ def crypto(request):
 def compile(request):
     if request.method == "POST":
         path = "https://api.jdoodle.com/v1/execute"
+        code = request.POST['code']
         params = {
-            "script": request.POST['code'],
+            "script": code,
             "stdin": "",
             "language": "nodejs",
             "versionIndex": "0",
@@ -46,9 +47,8 @@ def compile(request):
             "clientSecret": "8a188eb5edb8802a1b740a4dc0aceb2dc29439a1d0f3034c9be6ee404cddb6a7"
         }
         response = requests.post(path, headers={"Content-Type": "application/json"}, data=json.dumps(params))
-        return render(request, 'main/compile.html', {'output': response.json()})
+        return render(request, 'main/compile.html', {'output': response.json(), 'user_code':code})
     return render(request, 'main/compile.html')
-    # return render(request, 'main/compile.html', {'output': response.json()})
 
 
 # RU
