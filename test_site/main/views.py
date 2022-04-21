@@ -1,9 +1,10 @@
 import json
 
 import requests
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponseRedirect
-from .models import Article
+from .models import Article, Code
+from datetime import datetime
 
 
 # EN
@@ -35,20 +36,31 @@ def crypto(request):
 
 
 def compile(request):
+    latest_codes = Code.objects.order_by('-publishing_date')[:10]
     if request.method == "POST":
-        path = "https://api.jdoodle.com/v1/execute"
-        code = request.POST['code']
-        params = {
-            "script": code,
-            "stdin": "",
-            "language": "nodejs",
-            "versionIndex": "0",
-            "clientId": "eea45300d8deecc52a25aa145b624cdc",
-            "clientSecret": "8a188eb5edb8802a1b740a4dc0aceb2dc29439a1d0f3034c9be6ee404cddb6a7"
-        }
-        response = requests.post(path, headers={"Content-Type": "application/json"}, data=json.dumps(params))
-        return render(request, 'main/compile.html', {'output': response.json(), 'user_code':code})
-    return render(request, 'main/compile.html')
+        shared_code = request.POST.get('share_code', False)
+        code = request.POST.get('code', False)
+        submit = request.POST.get('submit_code', False)
+        # code = request.Post['code']
+        if submit and code:
+            path = "https://api.jdoodle.com/v1/execute"
+            params = {
+                "script": code,
+                "stdin": "",
+                "language": "nodejs",
+                "versionIndex": "0",
+                "clientId": "eea45300d8deecc52a25aa145b624cdc",
+                "clientSecret": "8a188eb5edb8802a1b740a4dc0aceb2dc29439a1d0f3034c9be6ee404cddb6a7"
+            }
+            response = requests.post(path, headers={"Content-Type": "application/json"}, data=json.dumps(params))
+            return render(request, 'main/compile.html',
+                          {'output': response.json(), 'user_code': code, 'latest_codes': latest_codes})
+        if shared_code and code:
+            new_code = Code(code=code, publishing_date = datetime.now())
+            new_code.save()
+            code = False
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return render(request, 'main/compile.html', {'latest_codes': latest_codes})
 
 
 # RU

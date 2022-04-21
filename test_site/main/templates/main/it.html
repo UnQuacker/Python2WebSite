@@ -3,13 +3,18 @@
 {% block content %}
 {% if latest_articles %}
 
-<div class ="container a">
+<div class ="container news">
     <h2>IT News</h2>
     {% for article in latest_articles %}
     <div class="pin container-fluid">
+        <div>
         <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Mallard2.jpg" class="">
-    <h4 class=""><a href="{% url 'main:detailIT' article.id %}">{{article.article_title}}</a></h4>
-        <p>{{article.article_text}}</p>
+        <h4 class=""><a href="{% url 'main:detailIT' article.id %}">{{article.article_title}}</a></h4>
+        
+    </div>
+    
+    <p>{{article.article_text}}</p>
+        
     </div>
     {% endfor %}
 </div>
@@ -17,12 +22,4 @@
     {% else %}
         No articles were found! :c
     {% endif %}
-<div id="footer" class="row">
-        <div>
-            We are a developers
-        </div>
-        <div class="">© 2022 Copyright:
-            <a href="#">GACHISTY</a>
-        </div>
-    </div>
 {% endblock %}

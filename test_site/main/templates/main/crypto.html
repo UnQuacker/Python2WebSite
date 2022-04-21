@@ -8,16 +8,21 @@
 {% if latest_articles %}
     
     
-    <div class ="container a">
-        <h2>Crypto News</h2>
-        {% for article in latest_articles %}
-        <div class="pin container-fluid">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Mallard2.jpg" class="">
+<div class ="container news">
+    <h2>Crypto News</h2>
+    {% for article in latest_articles %}
+    <div class="pin container-fluid">
+        <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Mallard2.jpg" class="">
         <h4 class=""><a href="{% url 'main:detailCrypto' article.id %}">{{article.article_title}}</a></h4>
-            <p>{{article.article_text}}</p>
-        </div>
-        {% endfor %}
+        
     </div>
+    
+    <p>{{article.article_text}}</p>
+        
+    </div>
+    {% endfor %}
+</div>
     
 
     

@@ -1,188 +1,84 @@
-*{margin: 0;}
-
-body{
-    background-color: #FAF0F8;
-    font-family: ff-tisa-sans-web-pro, sans-serif;
-    font-style: normal;
-    font-weight: 100;
-    color: #501A3E;
-    text-shadow:1px 1px #F30FAA;
-    max-height: min-content;
-}
-#footer{
-    position:relative;
-    bottom:0;
-    width:100%;
-    text-align:center;
-    background-color: #A71077;
-    margin:0;
-}
-
-#logo{
-    max-width: 64px;
-}
-
-
 nav{
-    display:flex;
-    font-size: x-large;
-    background-color: #A71077;
-    justify-content:center;
-    align-items: center;
-    vertical-align:middle;
-}
-
-@media only screen and (min-width: 1500px){
-    .btn{
-        display: none;
-    }
-    .toggling{
-        display: none;
-    }
-    .nav-link{
-        color: #501A3E;
-        text-shadow:1px #F30FAA;
-        margin:0 10px 0 10px;
-    }
-}
-@media only screen and (max-width: 1500px){
-    nav{
-        box-shadow: #9D5E89 0px 2px 0px;
-    }
-    .nav-item{
-        display:none;
-    }
-    a.active{
-        margin-left:43%;
-    }
-    .toggling{
-        background-color: #A71077;
-        display:none;
-        transition: 0.5s;
-    }
-    ul{
-        margin-left:40%;
-        padding: 2px;
-    }
-    li.togle{
-        border-left: 2px solid #9D5E89;
-        padding-left: 3px;
-        max-width: fit-content;
-        margin-top: 2px;
-
-    }
-}
-@media only screen and (max-width: 1000px){
-    a.active{
-        margin-left:30%;
-    }
-    ul{
-        margin-left:20%;
-        padding: 2px;
-    }
-}
-@media only screen and (max-width: 500px){
-    a.active{
-        margin-left:10%;
-    }
+    width:100%;
+    display: flex;    
+    padding: 10%;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: beige;
+    box-shadow:0 1px grey;
     
 }
-.btn{
-    position:absolute;
-    top:25%;
-    right: 30px;
-    left:auto;
-    border:0;
+*, ::after, ::before {
+    box-sizing: border-box;
 }
-.nav-link{
-    color: #501A3E;
+@media only screen and (min-width: 768px){
+    nav div ul li{
+        margin:auto 20px;
+    }
+    }
+@media only screen and (max-width: 768px){
+nav div ul li{
+    text-align: center;
+    border-bottom: 1px solid black;
 }
-a{
-    text-decoration: none;
-    color: #501A3E;
 }
-h1{
-    color: #501A3E;
+div.container h2{
+    text-align: center;
+}
+div.pin{
     display: flex;
-    justify-content:center;
-    align-items: center;
-    text-shadow: #F30FAA;
+    margin:10px auto;
+    background-color:antiquewhite ;
+    padding:10px;
+    filter: drop-shadow(0 1px 1px black)
 }
-h3{
-    text-align: center;
-    color: #501A3E;
+div.pin div{
+display: flex;
+flex-direction: column;
+text-align: center;
 }
-.pin{
-    
-    box-shadow: #9D5E89 0px 3px 8px;
-    position: relative;
-    background-color: #FAF0F8;
+div.pin div img{
+    width:300px;
+    box-shadow: 1px 1px black;
 }
-.bar{
-    position: relative;
+div.pin p{
     display: flex;
-    justify-content:center;
-    align-items: center;
+    padding-left: 10px;
 }
-.cont{
-    position: relative;
-    margin-top: 2%;
-    margin-bottom: 10%;
+div.compiler{
+    display: flex;
+    background-color: beige;
+    filter: drop-shadow(0 1px 1px black);
+    margin: 10px auto;
+    flex-direction: column;
 }
-.crc{
-    background-color: #FAF0F8;
-    box-shadow:#9D5E89 0px 3px 8px;
-    margin-top: 2.5px;
-    margin-bottom: 2.5px;
-}
-div.crc h4{
-    border-bottom: black solid 1px;
-    max-width: fit-content;
-}
-div.crc p{
-    margin: auto;
-}
-h4 img{
-    height:25px;
-    border:none;
-}
-div.pin img{
-    position: relative;
-    max-width:200px;
-}
-div.pin h4{
-    position: relative;
-   
-}
-div.container.a{
-    background-color: #FAF0F8;
-    padding-bottom: 10px;
-    box-shadow:#9D5E89 0px 3px 8px;
-    margin-bottom: 20px;
-}
-.input{
-    position: absolute;
-    width: 50%;
-}
-div.input h4{
+div.input h4, div.output h4{
     text-align: center;
 }
-.button{
-    position: absolute;
-    top:auto;
-    right: 5px;
-    background-color:#FAF0F8;
-    border-color: #9D5E89;
-    color:#501A3E;
+div.input div.buttons{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: end;
 }
-.output{
-    position: absolute;
-    width: 50%;
-    top: 0;
-    right: 0;
+div.share{
+    display: flex;
+    margin: 10px auto;
 }
-
-div.output h4{
+div.share{
+    display: flex;
+    margin:10px auto;
+    background-color:antiquewhite ;
+    padding:10px;
+    filter: drop-shadow(0 1px 1px black);
+    justify-content: center;
     text-align: center;
 }
-
+div.compiler div.language{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+div.coding{
+    display: flex;
+    justify-content: space-evenly;
+}

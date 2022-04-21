@@ -12,3 +12,8 @@ class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     comment_author = models.CharField('comment author', max_length=100)
     comment_text = models.TextField('comment text')
+
+
+class Code(models.Model):
+    code = models.TextField('code')
+    publishing_date = models.DateTimeField('publishing date')
