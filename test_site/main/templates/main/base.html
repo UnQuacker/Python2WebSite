@@ -88,12 +88,15 @@
                   {% csrf_token %}
                   <div class="register">
                       <p>Username:</p>
-                      {{form.username}}
+                      <input type="text" name="username">
+<!--                      {{form.username}}-->
                       <p>Password:</p>
-                      {{form.password1}}
+                      <input type="password" name="password1">
+<!--                      {{form.password1}}-->
                       <p>Confirm password</p>
-                      {{form.password2}}
-                      {{form.errors}}
+                      <input type="password" name="password2">
+<!--                      {{form.password2}}-->
+<!--                      <p>{{form.errors}}</p>-->
                       <button class="btn" type="submit" name="register">Sign up</button>
                   </div>
 

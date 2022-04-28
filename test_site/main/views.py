@@ -8,6 +8,7 @@ from django.contrib import messages
 from .forms import RegisterUser
 from .models import Article, Code
 from datetime import datetime
+from django.contrib.auth import authenticate
 
 
 # EN
@@ -25,18 +26,27 @@ from datetime import datetime
 #     return render(request, 'main/base.html', status=204)
 
 
+# def login(request):
+#     username = request.POST['username']
+#     password = request.POST['password']
+#     user = authenticate(request, username=username, password=password)
+#     if user is not None:
+#         login(request, user)
+#         messages.success(request, 'YAY!')
+
+
 def return_form(request):
     form = RegisterUser()
     if request.method == 'POST':
         # is_register = request.POST.get('register', False)
         # if is_register:
-            form = RegisterUser(request.POST)
-            if form.is_valid():
-                form.save(commit=True)
-            # else:
-            #     messages.error(request, 'not valid')
+        form = RegisterUser(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
         # else:
-        #     messages.error(request, '!registered' + str(request.POST.get('register')))
+        #     messages.error(request, 'not valid')
+    # else:
+    #     messages.error(request, '!registered' + str(request.POST.get('register')))
     # else:
     #     messages.error(request, 'not post')
     return form
