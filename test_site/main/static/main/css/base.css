@@ -1,3 +1,24 @@
+button:hover,
+button:focus,
+button:active{
+    outline: none;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+}
+
+
+body{
+    color:black;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+a{
+    color: black;
+    
+}
+.nav-link{
+    color: black;
+}
 nav{
     width:100%;
     display: flex;    
@@ -8,6 +29,7 @@ nav{
     box-shadow:0 1px grey;
     
 }
+
 *, ::after, ::before {
     box-sizing: border-box;
 }
@@ -28,7 +50,7 @@ div.container h2{
 div.pin{
     display: flex;
     margin:10px auto;
-    background-color:antiquewhite ;
+    background-color:beige ;
     padding:10px;
     filter: drop-shadow(0 1px 1px black)
 }
@@ -67,7 +89,7 @@ div.share{
 div.share{
     display: flex;
     margin:10px auto;
-    background-color:antiquewhite ;
+    background-color:beige ;
     padding:10px;
     filter: drop-shadow(0 1px 1px black);
     justify-content: center;
@@ -81,4 +103,23 @@ div.compiler div.language{
 div.coding{
     display: flex;
     justify-content: space-evenly;
+}
+div.crcarr{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px auto;
+    align-content: space-between;
+    justify-content: center;
+}
+div.crc{
+    display: flex;
+    flex-direction:column;
+    background-color:beige ;
+    padding: 5px;
+    margin: 5px;
+    width: 250px;
+    filter: drop-shadow(0 1px 1px black);
+}
+div.crc img{
+    height:40px;
 }

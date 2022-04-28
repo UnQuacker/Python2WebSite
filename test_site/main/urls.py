@@ -19,6 +19,7 @@ urlpatterns = [
 
     path('en/coding', views.compile, name='compile'),
 
+    path('en/profile', views.profile, name='profile'),
     # RU
 
     path('ru/cybersport', views.indexru),

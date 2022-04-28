@@ -2,22 +2,52 @@ import json
 
 import requests
 from django.shortcuts import render, redirect
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.contrib.auth.forms import UserCreationForm
+from .forms import RegisterUser
 from .models import Article, Code
 from datetime import datetime
 
 
 # EN
+def register(request):
+    form = RegisterUser()
+    if request.method == 'POST':
+        register = request.POST.get('register', False)
+        if register:
+            form = RegisterUser(request.POST)
+            if form.is_valid():
+                form.save()
+            else:
+                return render(request, 'main/base.html', status=204)
+
+    return render(request, 'main/base.html', status=204)
+
+
+def return_form(request):
+    form = RegisterUser()
+    if request.method == 'POST':
+        is_register = request.POST.get('register', False)
+        if is_register:
+            form = RegisterUser(request.POST)
+            if form.is_valid():
+                form.save()
+                print("Quack")
+            else:
+                return render(request, 'main/profile.html')
+    return form
 
 
 def index(request):
+    form = return_form(request)
     latest_articles = Article.objects.order_by('-publishing_date')[:10]
-    return render(request, 'main/index.html', {'latest_articles': latest_articles})
+    return render(request, 'main/index.html', {'latest_articles': latest_articles, 'form': form})
 
 
 def it(request):
+    form = return_form(request)
     latest_articles = Article.objects.order_by('-publishing_date')[:10]
-    return render(request, 'main/it.html', {'latest_articles': latest_articles})
+    return render(request, 'main/it.html', {'latest_articles': latest_articles, 'form': form})
 
 
 def detail(request, article_id):
@@ -25,17 +55,20 @@ def detail(request, article_id):
         a = Article.objects.get(id=article_id)
     except:
         raise Http404("No Page was found!")
-    return render(request, "main/detail.html", {'article': a})
+    form = return_form(request)
+    return render(request, "main/detail.html", {'article': a, 'form': form})
 
 
 def crypto(request):
+    form = return_form(request)
     api_data = requests.get(
         'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false').json()
     latest_articles = Article.objects.order_by('-publishing_date')[:10]
-    return render(request, 'main/crypto.html', {'latest_articles': latest_articles, 'api_data': api_data})
+    return render(request, 'main/crypto.html', {'latest_articles': latest_articles, 'api_data': api_data, 'form': form})
 
 
 def compile(request):
+    form = return_form(request)
     latest_codes = Code.objects.order_by('-publishing_date')[:10]
     if request.method == "POST":
         shared_code = request.POST.get('share_code', False)
@@ -54,13 +87,17 @@ def compile(request):
             }
             response = requests.post(path, headers={"Content-Type": "application/json"}, data=json.dumps(params))
             return render(request, 'main/compile.html',
-                          {'output': response.json(), 'user_code': code, 'latest_codes': latest_codes})
+                          {'output': response.json(), 'user_code': code, 'latest_codes': latest_codes, 'form': form})
         if shared_code and code:
-            new_code = Code(code=code, publishing_date = datetime.now())
+            new_code = Code(code=code, publishing_date=datetime.now())
             new_code.save()
             code = False
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    return render(request, 'main/compile.html', {'latest_codes': latest_codes})
+    return render(request, 'main/compile.html', {'latest_codes': latest_codes, 'form': form})
+
+
+def profile(request):
+    return render(request, 'main/profile.html')
 
 
 # RU

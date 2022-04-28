@@ -14,7 +14,7 @@
     <div class="pin container-fluid">
         <div>
         <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Mallard2.jpg" class="">
-        <h4 class=""><a href="{% url 'main:detailCrypto' article.id %}">{{article.article_title}}</a></h4>
+        <h4 class=""><a class="nav-link" href="{% url 'main:detailCrypto' article.id %}">{{article.article_title}}</a></h4>
         
     </div>
     
@@ -31,23 +31,17 @@
         No articles were found! :c
     {% endif %}
 
-    <div class ="container a">
+    <div class ="container">
         <h2>Crypto course</h2>
+    <div class="crcarr">
     {% for crypto in api_data %}
-    <div class = "container crc">
+    <div class = "crc">
     <h4 class="">{{crypto.name}} <img src="{{crypto.image}}" class=""></h4> 
     <p>price:{{crypto.current_price}}</p>
     <p>market cap:{{crypto.market_cap}}</p>
     </div>
     {% endfor %}
     </div>
-    <div id="footer" class="row">
-        <div>
-            We are a developers
-        </div>
-        <div class="">© 2022 Copyright:
-            <a href="#">GACHISTY</a>
-        </div>
-    </div>
+</div>
     
     {% endblock %}
