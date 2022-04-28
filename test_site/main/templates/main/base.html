@@ -51,17 +51,15 @@
       </div>
     </div>
   </nav>
-    
         {% block content %}
 
         {% endblock %}
 
 
-
   <div class="blur">
       <div class="form-box">
           <div class="form-buttons">
-              <button class="btn form-btn l" type="button" onclick="login()">
+              <button class="btn form-btn l" type="button" onclick="logining()">
                   Log in
               </button>
               <button class="btn form-btn r" type="button" onclick="registering()">
@@ -70,7 +68,7 @@
           </div>
           <div class="toggle">
 
-              <form method="POST" name="register">
+              <form method="POST" name="login">
                   {% csrf_token %}
 
                   <div class="login">
@@ -93,8 +91,10 @@
                       {{form.username}}
                       <p>Password:</p>
                       {{form.password1}}
-                      <button class="btn" type="submit">Sign up</button>
+                      <p>Confirm password</p>
+                      {{form.password2}}
                       {{form.errors}}
+                      <button class="btn" type="submit" name="register">Sign up</button>
                   </div>
 
               </form>

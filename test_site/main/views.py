@@ -4,42 +4,52 @@ import requests
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from .forms import RegisterUser
 from .models import Article, Code
 from datetime import datetime
 
 
 # EN
-def register(request):
-    form = RegisterUser()
-    if request.method == 'POST':
-        register = request.POST.get('register', False)
-        if register:
-            form = RegisterUser(request.POST)
-            if form.is_valid():
-                form.save()
-            else:
-                return render(request, 'main/base.html', status=204)
-
-    return render(request, 'main/base.html', status=204)
+# def register(request):
+#     form = RegisterUser()
+#     if request.method == 'POST':
+#         register = request.POST.get('register', False)
+#         if register:
+#             form = RegisterUser(request.POST)
+#             if form.is_valid():
+#                 form.save()
+#             else:
+#                 return render(request, 'main/base.html', status=204)
+#
+#     return render(request, 'main/base.html', status=204)
 
 
 def return_form(request):
+    form = RegisterUser()
+    if request.method == 'POST':
+        # is_register = request.POST.get('register', False)
+        # if is_register:
+            form = RegisterUser(request.POST)
+            if form.is_valid():
+                form.save(commit=True)
+            # else:
+            #     messages.error(request, 'not valid')
+        # else:
+        #     messages.error(request, '!registered' + str(request.POST.get('register')))
+    # else:
+    #     messages.error(request, 'not post')
+    return form
+
+
+def index(request):
     form = RegisterUser()
     if request.method == 'POST':
         is_register = request.POST.get('register', False)
         if is_register:
             form = RegisterUser(request.POST)
             if form.is_valid():
-                form.save()
-                print("Quack")
-            else:
-                return render(request, 'main/profile.html')
-    return form
-
-
-def index(request):
-    form = return_form(request)
+                form.save(commit=True)
     latest_articles = Article.objects.order_by('-publishing_date')[:10]
     return render(request, 'main/index.html', {'latest_articles': latest_articles, 'form': form})
 
