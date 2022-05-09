@@ -26,15 +26,6 @@ from django.contrib.auth import authenticate
 #     return render(request, 'main/base.html', status=204)
 
 
-# def login(request):
-#     username = request.POST['username']
-#     password = request.POST['password']
-#     user = authenticate(request, username=username, password=password)
-#     if user is not None:
-#         login(request, user)
-#         messages.success(request, 'YAY!')
-
-
 def return_form(request):
     form = RegisterUser()
     if request.method == 'POST':
@@ -95,19 +86,24 @@ def compile(request):
         code = request.POST.get('code', False)
         submit = request.POST.get('submit_code', False)
         # code = request.Post['code']
+        language = request.POST.get('language_select', False)
+        language2 = request.POST.get('nodejs', False)
+        language3 = request.POST.get('python', False)
+        language4 = request.POST.get('java', False)
         if submit and code:
             path = "https://api.jdoodle.com/v1/execute"
             params = {
                 "script": code,
                 "stdin": "",
-                "language": "nodejs",
+                "language": language,
                 "versionIndex": "0",
                 "clientId": "eea45300d8deecc52a25aa145b624cdc",
                 "clientSecret": "8a188eb5edb8802a1b740a4dc0aceb2dc29439a1d0f3034c9be6ee404cddb6a7"
             }
             response = requests.post(path, headers={"Content-Type": "application/json"}, data=json.dumps(params))
             return render(request, 'main/compile.html',
-                          {'output': response.json(), 'user_code': code, 'latest_codes': latest_codes, 'form': form})
+                          {'output': response.json(), 'user_code': code, 'latest_codes': latest_codes, 'form': form,
+                           'test': language, 'test1': language2, 'test2': language3, 'test3': language4})
         if shared_code and code:
             new_code = Code(code=code, publishing_date=datetime.now())
             new_code.save()
@@ -123,25 +119,68 @@ def profile(request):
 # RU
 
 def indexru(request):
+    form = RegisterUser()
+    if request.method == 'POST':
+        is_register = request.POST.get('register', False)
+        if is_register:
+            form = RegisterUser(request.POST)
+            if form.is_valid():
+                form.save(commit=True)
     latest_articles = Article.objects.order_by('-publishing_date')[:10]
-    return render(request, 'main/indexru.html', {'latest_articles': latest_articles})
+    return render(request, 'main/ru/indexru.html', {'latest_articles': latest_articles, 'form': form})
 
 
 def itru(request):
+    form = return_form(request)
     latest_articles = Article.objects.order_by('-publishing_date')[:10]
-    return render(request, 'main/itru.html', {'latest_articles': latest_articles})
+    return render(request, 'main/ru/itru.html', {'latest_articles': latest_articles, 'form': form})
 
 
 def detailru(request, article_id):
     try:
         a = Article.objects.get(id=article_id)
     except:
-        raise Http404("Страница не найдена!")
-    return render(request, "main/detailru.html", {'article': a})
+        raise Http404("Страница не была найдена!")
+    form = return_form(request)
+    return render(request, "main/ru/detailru.html", {'article': a, 'form': form})
 
 
 def cryptoru(request):
+    form = return_form(request)
     api_data = requests.get(
         'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false').json()
     latest_articles = Article.objects.order_by('-publishing_date')[:10]
-    return render(request, 'main/cryptoru.html', {'latest_articles': latest_articles, 'api_data': api_data})
+    return render(request, 'main/ru/cryptoru.html', {'latest_articles': latest_articles, 'api_data': api_data, 'form': form})
+
+def compileru(request):
+    form = return_form(request)
+    latest_codes = Code.objects.order_by('-publishing_date')[:10]
+    if request.method == "POST":
+        shared_code = request.POST.get('share_code', False)
+        code = request.POST.get('code', False)
+        submit = request.POST.get('submit_code', False)
+        # code = request.Post['code']
+        language = request.POST.get('language_select', False)
+        language2 = request.POST.get('nodejs', False)
+        language3 = request.POST.get('python', False)
+        language4 = request.POST.get('java', False)
+        if submit and code:
+            path = "https://api.jdoodle.com/v1/execute"
+            params = {
+                "script": code,
+                "stdin": "",
+                "language": language,
+                "versionIndex": "0",
+                "clientId": "eea45300d8deecc52a25aa145b624cdc",
+                "clientSecret": "8a188eb5edb8802a1b740a4dc0aceb2dc29439a1d0f3034c9be6ee404cddb6a7"
+            }
+            response = requests.post(path, headers={"Content-Type": "application/json"}, data=json.dumps(params))
+            return render(request, 'main/compile.html',
+                          {'output': response.json(), 'user_code': code, 'latest_codes': latest_codes, 'form': form,
+                           'test': language, 'test1': language2, 'test2': language3, 'test3': language4})
+        if shared_code and code:
+            new_code = Code(code=code, publishing_date=datetime.now())
+            new_code.save()
+            code = False
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return render(request, 'main/ru/compileru.html', {'latest_codes': latest_codes, 'form': form})

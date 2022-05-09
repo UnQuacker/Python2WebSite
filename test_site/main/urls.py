@@ -30,7 +30,9 @@ urlpatterns = [
 
     path('ru/it/' + '<int:article_id>', views.detailru, name='detailITRu'),
 
-    path('ru/cybersport/' + '<int:article_id>', views.detailru, name='detailCybersportRu')
+    path('ru/cybersport/' + '<int:article_id>', views.detailru, name='detailCybersportRu'),
+
+    path('ru/coding', views.compileru, name='compileRu'),
 
 ]
 

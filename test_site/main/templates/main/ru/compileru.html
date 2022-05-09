@@ -1,4 +1,4 @@
-{% extends 'main/base.html' %}
+{% extends 'main/ru/baseru.html' %}
 
 {% block content %}
 
@@ -11,7 +11,7 @@
             <option>python</option>
             <option>java</option>
         </select>
-        <p>Chosen language: {{test}}</p>
+        <p>Выбранный язык: {{test}}</p>
         <p>{{test1}} {{test2}} {{test3}}</p>
         {% if not test %}
         <p>Quack, failed test0</p>
@@ -25,7 +25,7 @@
         {% endif %}
         {% endif %}
         {% endif %}
-        <button class="btn" type="submit">select</button>
+        <button class="btn" type="submit">выбрать</button>
     </form></div>
 <div class="coding">
 <!--<form action = "{% url 'main:compile' %}" method="POST">-->
@@ -47,8 +47,8 @@
     {% csrf_token %}
     <div class="input" ><h4>Input</h4><textarea class="form-control" name="code" cols = 80 rows = 20 >{{user_code}}</textarea>
         <div class="buttons">
-            <button class="btn" type="submit" name="submit_code" value="submit_code">submit code</button>
-            <button class="btn" type="submit" name="share_code" value="share_code">share code</button>
+            <button class="btn" type="submit" name="submit_code" value="submit_code">скомпилировать код</button>
+            <button class="btn" type="submit" name="share_code" value="share_code">поделиться кодом</button>
 <!--            <input type="button" name="submit">-->
 <!--            <input type="button" name="shared_code">-->
         </div>
@@ -57,8 +57,8 @@
 </form>
 <div class="output"><h4>Output</h4><textarea class="form-control" cols = 80 rows = 20>{{output.output}}</textarea>
 
-    <p>Status Code: {{output.statusCode}}</p>
-    <p>CPU time: {{output.cpuTime}}</p>
+    <p>Код Статуса: {{output.statusCode}}</p>
+    <p>Время ЦП: {{output.cpuTime}}</p>
     <p>{{output.error}}</p>
     <p>{{test}}</p>
 
@@ -72,7 +72,7 @@
     {% for code in latest_codes %}
     <div class="share">
         <form action="">
-            <h4>Author:</h4>
+            <h4>Автор:</h4>
             <textarea class="form-control" type="text" cols = 80 rows = 20 >{{code.code}}
                 </textarea>
                 <button class="btn" type="submit">copy code</button></div>

@@ -1,0 +1,25 @@
+{% extends 'main/ru/baseru.html' %}
+
+{% block content %}
+{% if latest_articles %}
+
+<div class ="container news">
+    <h2>Новости IT</h2>
+    {% for article in latest_articles %}
+    <div class="pin container-fluid">
+        <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Mallard2.jpg" class="">
+        <h4 class=""><a class="nav-link" href="{% url 'main:detailIT' article.id %}">{{article.article_title}}</a></h4>
+
+    </div>
+
+    <p>{{article.article_text}}</p>
+
+    </div>
+    {% endfor %}
+</div>
+
+    {% else %}
+        Статьи не были найдены! :c
+    {% endif %}
+{% endblock %}
