@@ -87,10 +87,10 @@ def crypto(request):
 
 
 def compile(request):
-    if request.user.is_authenticated:
-        test1 = request.user.username
-    else:
-        test1 = "not authenticated"
+    # if request.user.is_authenticated:
+    #     test1 = request.user.username
+    # else:
+    #     test1 = "not authenticated"
     form = return_form(request)
     latest_codes = Code.objects.order_by('-publishing_date')[:10]
     if request.method == "POST":
@@ -115,7 +115,8 @@ def compile(request):
             response = requests.post(path, headers={"Content-Type": "application/json"}, data=json.dumps(params))
             return render(request, 'main/compile.html',
                           {'output': response.json(), 'user_code': code, 'latest_codes': latest_codes, 'form': form,
-                           'test': language, 'test1': test1})
+                           'test': language #, 'test1': test
+                           })
         if shared_code and code:
             new_code = Code(code=code, publishing_date=datetime.now())
             new_code.save()
@@ -127,6 +128,13 @@ def compile(request):
 def profile(request):
     return render(request, 'main/profile.html')
 
+
+def login(request):
+    return render(request, 'main/login.html')
+
+
+def register(request):
+    return render(request, 'main/register.html')
 
 # RU
 
@@ -164,7 +172,12 @@ def cryptoru(request):
     latest_articles = Article.objects.order_by('-publishing_date')[:10]
     return render(request, 'main/ru/cryptoru.html', {'latest_articles': latest_articles, 'api_data': api_data, 'form': form})
 
+
 def compileru(request):
+    # if request.user.is_authenticated:
+    #     test1 = request.user.username
+    # else:
+    #     test1 = "not authenticated"
     form = return_form(request)
     latest_codes = Code.objects.order_by('-publishing_date')[:10]
     if request.method == "POST":
@@ -173,9 +186,9 @@ def compileru(request):
         submit = request.POST.get('submit_code', False)
         # code = request.Post['code']
         language = request.POST.get('language_select', False)
-        language2 = request.POST.get('nodejs', False)
-        language3 = request.POST.get('python', False)
-        language4 = request.POST.get('java', False)
+        # language2 = request.POST.get('nodejs', False)
+        # language3 = request.POST.get('python', False)
+        # language4 = request.POST.get('java', False)
         if submit and code:
             path = "https://api.jdoodle.com/v1/execute"
             params = {
@@ -187,12 +200,13 @@ def compileru(request):
                 "clientSecret": "8a188eb5edb8802a1b740a4dc0aceb2dc29439a1d0f3034c9be6ee404cddb6a7"
             }
             response = requests.post(path, headers={"Content-Type": "application/json"}, data=json.dumps(params))
-            return render(request, 'main/compile.html',
+            return render(request, 'main/ru/compile.html',
                           {'output': response.json(), 'user_code': code, 'latest_codes': latest_codes, 'form': form,
-                           'test': language, 'test1': language2, 'test2': language3, 'test3': language4})
+                           'test': language  # , 'test1': test
+                           })
         if shared_code and code:
             new_code = Code(code=code, publishing_date=datetime.now())
             new_code.save()
             code = False
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    return render(request, 'main/ru/compileru.html', {'latest_codes': latest_codes, 'form': form})
+    return render(request, 'main/ru/compile.html', {'latest_codes': latest_codes, 'form': form})

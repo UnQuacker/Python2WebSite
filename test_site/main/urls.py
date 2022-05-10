@@ -20,6 +20,10 @@ urlpatterns = [
     path('en/coding', views.compile, name='compile'),
 
     path('en/profile', views.profile, name='profile'),
+
+    path('en/login', views.login, name='login'),
+
+    path('en/register', views.register, name='register'),
     # RU
 
     path('ru/cybersport', views.indexru),

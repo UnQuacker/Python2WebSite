@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="compiler">
-    <div class="language"><form action = "{% url 'main:compile' %}" method="POST">
+    <div class="language"><form action = "{% url 'main:compileRu' %}" method="POST">
         {% csrf_token %}
         <p>language:</p>
         <select class="form-select" name="language_select" id="languages">
@@ -11,20 +11,20 @@
             <option>python</option>
             <option>java</option>
         </select>
-        <p>Выбранный язык: {{test}}</p>
-        <p>{{test1}} {{test2}} {{test3}}</p>
-        {% if not test %}
-        <p>Quack, failed test0</p>
-        {% if not test1%}
-        <p>Quack, failed test1</p>
-        {% if not test2%}
-        <p>Quack, failed test2</p>
-        {% if not test3%}
-        <p>Quack, failed test3</p>
-        {% endif %}
-        {% endif %}
-        {% endif %}
-        {% endif %}
+<!--        <p>Выбранный язык: {{test}}</p>-->
+<!--        <p>{{test1}} {{test2}} {{test3}}</p>-->
+<!--        {% if not test %}-->
+<!--        <p>Quack, failed test0</p>-->
+<!--        {% if not test1%}-->
+<!--        <p>Quack, failed test1</p>-->
+<!--        {% if not test2%}-->
+<!--        <p>Quack, failed test2</p>-->
+<!--        {% if not test3%}-->
+<!--        <p>Quack, failed test3</p>-->
+<!--        {% endif %}-->
+<!--        {% endif %}-->
+<!--        {% endif %}-->
+<!--        {% endif %}-->
         <button class="btn" type="submit">выбрать</button>
     </form></div>
 <div class="coding">
