@@ -45,7 +45,7 @@
             <a class="nav-link" href="#footer">ABOUT US</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" onclick="profile()">PROFILE</a>
+            <a class="nav-link" href="profile">PROFILE</a>
           </li>
         </ul>
       </div>
@@ -56,58 +56,58 @@
         {% endblock %}
 
 
-  <div class="blur">
-      <div class="form-box">
-          <div class="form-buttons">
-              <button class="btn form-btn l" type="button" onclick="logining()">
-                  Log in
-              </button>
-              <button class="btn form-btn r" type="button" onclick="registering()">
-                  Register
-              </button>
-          </div>
-          <div class="toggle">
+<!--  <div class="blur">-->
+<!--      <div class="form-box">-->
+<!--          <div class="form-buttons">-->
+<!--              <button class="btn form-btn l" type="button" onclick="logining()">-->
+<!--                  Log in-->
+<!--              </button>-->
+<!--              <button class="btn form-btn r" type="button" onclick="registering()">-->
+<!--                  Register-->
+<!--              </button>-->
+<!--          </div>-->
+<!--          <div class="toggle">-->
 
-              <form method="POST" name="login">
-                  {% csrf_token %}
+<!--              <form method="POST" name="login">-->
+<!--                  {% csrf_token %}-->
 
-                  <div class="login">
-                      <p>Username</p>
-                      {{form.username}}
-                      <p>Password:</p>
-                      {{form.password1}}
-                      <div>
-                          <input type="checkbox" id="stay" name="stay">
-                          <label for="stay">Stay signed</label>
-                      </div>
-                      <button class="btn" type="submit">Log in</button>
-                  </div>
-
-              </form>
-              <form method="POST" name="register">
-                  {% csrf_token %}
-                  <div class="register">
-                      <p>Username:</p>
-                      <input type="text" name="username">
+<!--                  <div class="login">-->
+<!--                      <p>Username</p>-->
 <!--                      {{form.username}}-->
-                      <p>Password:</p>
-                      <input type="password" name="password1">
+<!--                      <p>Password:</p>-->
 <!--                      {{form.password1}}-->
-                      <p>Confirm password</p>
-                      <input type="password" name="password2">
-<!--                      {{form.password2}}-->
-<!--                      <p>{{form.errors}}</p>-->
-                      <button class="btn" type="submit" name="register">Sign up</button>
-                  </div>
+<!--                      <div>-->
+<!--                          <input type="checkbox" id="stay" name="stay">-->
+<!--                          <label for="stay">Stay signed</label>-->
+<!--                      </div>-->
+<!--                      <button class="btn" type="submit">Log in</button>-->
+<!--                  </div>-->
 
-              </form>
-          </div>
+<!--              </form>-->
+<!--              <form method="POST" name="register">-->
+<!--                  {% csrf_token %}-->
+<!--                  <div class="register">-->
+<!--                      <p>Username:</p>-->
+<!--                      <input type="text" name="username">-->
+<!--&lt;!&ndash;                      {{form.username}}&ndash;&gt;-->
+<!--                      <p>Password:</p>-->
+<!--                      <input type="password" name="password1">-->
+<!--&lt;!&ndash;                      {{form.password1}}&ndash;&gt;-->
+<!--                      <p>Confirm password</p>-->
+<!--                      <input type="password" name="password2">-->
+<!--&lt;!&ndash;                      {{form.password2}}&ndash;&gt;-->
+<!--&lt;!&ndash;                      <p>{{form.errors}}</p>&ndash;&gt;-->
+<!--                      <button class="btn" type="submit" name="register">Sign up</button>-->
+<!--                  </div>-->
+
+<!--              </form>-->
+<!--          </div>-->
 
 
 
 
-    </div>
-  </div>
+<!--    </div>-->
+<!--  </div>-->
 
 
 

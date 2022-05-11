@@ -10,6 +10,9 @@ class RegisterUser(UserCreationForm):
         fields = ['username', 'password1', 'password2']
 
 
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
 # LANGUAGE_CHOICES = [
 #     ('nodejs', 'NodeJs'),
 #     ('java', 'Java'),

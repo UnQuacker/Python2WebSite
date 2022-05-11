@@ -32,7 +32,7 @@ button:active
     height:max-content;
     align-content: center;
     align-items: center;
-    margin-top: 40%;
+    margin-top: 10%;
 }
 .register{
     display: flex;

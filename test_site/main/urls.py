@@ -21,7 +21,7 @@ urlpatterns = [
 
     path('en/profile', views.profile, name='profile'),
 
-    path('en/login', views.login, name='login'),
+    path('en/login', views.user_login, name='login'),
 
     path('en/register', views.register, name='register'),
     # RU
