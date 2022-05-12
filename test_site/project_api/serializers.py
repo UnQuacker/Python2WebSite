@@ -5,7 +5,7 @@ from rest_framework import serializers
 from main.models import Article
 
 
-class Article_serializer(serializers.ModelSerializer):
+class Article_serializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Article
         fields = '__all__'

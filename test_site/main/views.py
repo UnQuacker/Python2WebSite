@@ -25,6 +25,7 @@ from django.contrib.auth import authenticate, login
 #
 #     return render(request, 'main/base.html', status=204)
 def user_login(request):
+    message = ""
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -58,7 +59,7 @@ def user_login(request):
 #     #     messages.error(request, '!registered' + str(request.POST.get('register')))
 #     # else:
 #     #     messages.error(request, 'not post')
-    return form
+#     return form
 
 
 def register(request):
@@ -160,7 +161,11 @@ def compile(request):
 
 
 def profile(request):
-    return render(request, 'main/profile.html')
+    if request.user.is_authenticated:
+        return render(request, 'main/profile.html')
+    else:
+        form = RegisterUser()
+        return render(request, 'main/register.html', {'form': form})
 
 
 # def loginView(request):

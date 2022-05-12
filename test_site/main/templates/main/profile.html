@@ -2,10 +2,12 @@
 
 {% load static %}
 {% block content %}
+<div class="profile">
 {% if request.user.is_authenticated %}
   <p>{{request.user.username}}</p>
 {% else %}
   <p>not authorized user</p>
 {% endif %}
 <p><a href="{% url 'logout' %}">Log Out</a></p>
+  </div>
 {% endblock %}

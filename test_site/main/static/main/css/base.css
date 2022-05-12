@@ -123,3 +123,15 @@ div.crc{
 div.crc img{
     height:40px;
 }
+div.profile{
+    display:flex;
+    margin: 30px auto;
+    width: 60%;
+    height: 400px;
+    flex-direction: column;
+    background-color: beige;
+    justify-content: flex-end;
+    align-content: center;
+    align-items: center;
+    filter: drop-shadow(0 1px 1px black);
+}

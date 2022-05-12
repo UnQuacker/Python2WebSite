@@ -29,20 +29,26 @@ button:active
     margin: auto;
     flex-direction: column;
     transition: 2s;
-    height:max-content;
     align-content: center;
     align-items: center;
     margin-top: 10%;
+    background-color: beige;
+    filter: drop-shadow(0 1px 1px black);
+    width: 300px;
+    height: 170px;
 }
 .register{
     display: flex;
     margin: auto;
     flex-direction: column;
     transition: 2s;
-    height:max-content;
     align-content: center;
     align-items: center;
     margin-top: 10%;
+    background-color: beige;
+    filter: drop-shadow(0 1px 1px black);
+    width: 300px;
+    height: 300px;
 }
 div.login button,
 div.register button{
