@@ -7,15 +7,17 @@ app_name = 'main'
 urlpatterns = [
     # EN
 
-    path('en/cybersport', views.index),
-    path('en/it', views.it),
-    path('en/cryptocurrency', views.crypto),
+    path('en/cybersport', views.index, name='cybersport'),
+    path('en/it', views.it, name='it'),
+    path('en/cryptocurrency', views.crypto, name='cryptocurrency'),
 
-    path('en/cryptocurrency/'+'<int:article_id>', views.detail, name='detailCrypto'),
+    path('en/cryptocurrency/' + '<int:article_id>', views.detail, name='detailCrypto'),
 
-    path('en/it/'+'<int:article_id>', views.detail, name='detailIT'),
+    path('en/cryptocurrency/graph/' + '<str:cryptocurrency_name>', views.cryptograph, name='cryptoGraph'),
 
-    path('en/cybersport/'+'<int:article_id>', views.detail, name='detailCybersport'),
+    path('en/it/' + '<int:article_id>', views.detail, name='detailIT'),
+
+    path('en/cybersport/' + '<int:article_id>', views.detail, name='detailCybersport'),
 
     path('en/coding', views.compile, name='compile'),
 

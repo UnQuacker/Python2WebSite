@@ -36,7 +36,7 @@
     <div class="crcarr">
     {% for crypto in api_data %}
     <div class = "crc">
-    <h4 class="">{{crypto.name}} <img src="{{crypto.image}}" class=""></h4> 
+    <a class="" href="{% url 'main:cryptoGraph' crypto.id %}">{{crypto.name}} <img src="{{crypto.image}}" class=""></a>
     <p>price:{{crypto.current_price}}</p>
     <p>market cap:{{crypto.market_cap}}</p>
     </div>

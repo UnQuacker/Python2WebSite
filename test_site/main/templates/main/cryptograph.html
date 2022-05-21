@@ -1,0 +1,62 @@
+{% extends 'main/base.html' %}
+
+{% block script %}
+
+<script>
+    var data = [];
+    var labels = [];
+    for (let i=0;i<7;i++){
+        var day = document.getElementsByClassName("day")[i].innerHTML
+        data.push(day)
+    }
+    console.log(data.type)
+
+    const ctx = document.getElementById('myChart');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["1","2","3","4","5","6","7"],
+            datasets: [{
+                label: 'Price change history',
+                data: data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(153, 102, 255, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    "rgba(54, 162, 235, 1)"
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>
+
+{% endblock %}
+
+{% block content %}
+<canvas id="myChart" width="40" height="80"></canvas>
+
+{% for api in data %}
+<p class="day" style="display:none"> {{api.market_data.current_price.usd}} </p>
+{% endfor %}
+
+{% endblock %}

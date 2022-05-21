@@ -1,5 +1,5 @@
 import json
-
+import datetime
 import requests
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponseRedirect, HttpResponse
@@ -7,7 +7,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import RegisterUser, LoginForm
 from .models import Article, Code
-from datetime import datetime
 from django.contrib.auth import authenticate, login
 
 
@@ -100,6 +99,19 @@ def index(request):
     return render(request, 'main/index.html', {'latest_articles': latest_articles})
 
 
+def cryptograph(request, cryptocurrency_name):
+    header = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'}
+    url = f'https://api.coingecko.com/api/v3/coins/{cryptocurrency_name}/history?date=20-05-2022&localization=en'
+    api_data = requests.get(url=url, headers=header).json()
+    api_data = []
+    for i in range(7):
+        now = datetime.datetime.now() - datetime.timedelta(days=i)
+        date = f"{now.day}-{now.month}-{now.year}"
+        url = f'https://api.coingecko.com/api/v3/coins/{cryptocurrency_name}/history?date={date}&localization=en'
+        api_data.append(requests.get(url=url).json())
+    return render(request, 'main/cryptograph.html',{'data': api_data})
+
+
 def it(request):
     # form = return_form(request)
     latest_articles = Article.objects.filter(article_type="IT").order_by('-publishing_date')[:10]
@@ -117,8 +129,10 @@ def detail(request, article_id):
 
 def crypto(request):
     # form = return_form(request)
-    api_data = requests.get(
-        'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false').json()
+    header = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'}
+    url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false'
+    api_data = requests.get(url=url, headers=header).json()
     latest_articles = Article.objects.filter(article_type="Cryptocurrency").order_by('-publishing_date')[:10]
     return render(request, 'main/crypto.html', {'latest_articles': latest_articles, 'api_data': api_data})
 
