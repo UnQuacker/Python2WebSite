@@ -1,0 +1,13 @@
+{% extends 'main/ru/baseru.html' %}
+
+{% load static %}
+{% block content %}
+<div class="profile">
+{% if request.user.is_authenticated %}
+  <p>{{request.user.username}}</p>
+{% else %}
+  <p>не авторизованный пользователь</p>
+{% endif %}
+<p><a href="{% url 'logout' %}">Выйти</a></p>
+  </div>
+{% endblock %}

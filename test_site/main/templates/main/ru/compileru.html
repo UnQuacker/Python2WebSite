@@ -2,16 +2,20 @@
 
 {% block content %}
 
+        <form action = "{% url 'main:compileRu' %}" method="POST">
+
 <div class="compiler">
-    <div class="language"><form action = "{% url 'main:compileRu' %}" method="POST">
+    <div class="language">
         {% csrf_token %}
-        <p>language:</p>
+        <p>Язык:</p>
         <select class="form-select" name="language_select" id="languages">
-            <option>NodeJS</option>
-            <option>python</option>
-            <option>java</option>
+            <option value= "nodejs">NodeJS</option>
+            <option value= "python3">python</option>
+            <option value="java">java</option>
         </select>
-<!--        <p>Выбранный язык: {{test}}</p>-->
+<!--        <p>{{test1}}</p>-->
+
+<!--        <p>Chosen language: {{test}}</p>-->
 <!--        <p>{{test1}} {{test2}} {{test3}}</p>-->
 <!--        {% if not test %}-->
 <!--        <p>Quack, failed test0</p>-->
@@ -25,8 +29,9 @@
 <!--        {% endif %}-->
 <!--        {% endif %}-->
 <!--        {% endif %}-->
-        <button class="btn" type="submit">выбрать</button>
-    </form></div>
+<!--        <button class="btn" type="submit" value="nodejs">select</button>-->
+</div>
+
 <div class="coding">
 <!--<form action = "{% url 'main:compile' %}" method="POST">-->
 <!--    {% csrf_token %}-->
@@ -43,40 +48,41 @@
 <!--&lt;!&ndash;        </div>&ndash;&gt;-->
 <!--    </div>-->
 <!--</form>-->
-    <form action = "{% url 'main:compile' %}" method="POST">
+<!--    <form action = "{% url 'main:compile' %}" method="POST">-->
     {% csrf_token %}
-    <div class="input" ><h4>Input</h4><textarea class="form-control" name="code" cols = 80 rows = 20 >{{user_code}}</textarea>
+    <div class="input" ><h4>Ввод</h4><textarea class="form-control" name="code" cols = 80 rows = 20 >{{user_code}}</textarea>
         <div class="buttons">
-            <button class="btn" type="submit" name="submit_code" value="submit_code">скомпилировать код</button>
+            <button class="btn" type="submit" name="submit_code" value="submit_code">отправить код</button>
             <button class="btn" type="submit" name="share_code" value="share_code">поделиться кодом</button>
 <!--            <input type="button" name="submit">-->
 <!--            <input type="button" name="shared_code">-->
         </div>
     </div>
 
-</form>
+
 <div class="output"><h4>Output</h4><textarea class="form-control" cols = 80 rows = 20>{{output.output}}</textarea>
 
     <p>Код Статуса: {{output.statusCode}}</p>
-    <p>Время ЦП: {{output.cpuTime}}</p>
+    <p>Время ЦПУ: {{output.cpuTime}}</p>
     <p>{{output.error}}</p>
-    <p>{{test}}</p>
+<!--    <p>{{test}}</p>-->
 
 </div>
 </div>
 </div>
+            </form>
 
 <div class="container ">
-    <h2>Shared codes</h2>
+    <h2>поделенные коды</h2>
     {% if latest_codes %}
     {% for code in latest_codes %}
     <div class="share">
-        <form action="">
+<!--        <form action="">-->
             <h4>Автор:</h4>
             <textarea class="form-control" type="text" cols = 80 rows = 20 >{{code.code}}
                 </textarea>
-                <button class="btn" type="submit">copy code</button></div>
-        </form>
+                <button class="btn" type="submit"></button></div>
+<!--        </form>-->
     {% endfor %}
     {% endif %}
     </div>

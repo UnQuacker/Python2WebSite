@@ -10,110 +10,12 @@ from .models import Article, Code
 from django.contrib.auth import authenticate, login
 
 
-# EN
-# def register(request):
-#     form = RegisterUser()
-#     if request.method == 'POST':
-#         register = request.POST.get('register', False)
-#         if register:
-#             form = RegisterUser(request.POST)
-#             if form.is_valid():
-#                 form.save()
-#             else:
-#                 return render(request, 'main/base.html', status=204)
-#
-#     return render(request, 'main/base.html', status=204)
-def user_login(request):
-    message = ""
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(username=cd['username'], password=cd['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    # return HttpResponse('Authenticated successfully')
-                    return render(request, 'main/profile.html')
-                else:
-                    message = "Disabled account"
-            else:
-                message = "Invalid login/password"
-    else:
-        form = LoginForm()
-    return render(request, 'main/login.html', {'form': form, 'message': message})
-
-
-# def return_form(request):
-#     form = RegisterUser()
-#     if request.method == 'POST':
-#         # is_register = request.POST.get('register', False)
-#         # if is_register:
-#         form = RegisterUser(request.POST)
-#         if form.is_valid():
-#             form.save(commit=True)
-#         # else:
-#         #     messages.error(request, 'not valid')
-#     # else:
-#     #     messages.error(request, '!registered' + str(request.POST.get('register')))
-#     # else:
-#     #     messages.error(request, 'not post')
-#     return form
-
-
-def register(request):
-    form = RegisterUser()
-    if request.method == 'POST':
-        # is_register = request.POST.get('register', False)
-        # if is_register:
-        form = RegisterUser(request.POST)
-        if form.is_valid():
-            form.save(commit=True)
-            return render(request, 'main/profile.html')
-        # else:
-        #     messages.error(request, 'not valid')
-    # else:
-    #     messages.error(request, '!registered' + str(request.POST.get('register')))
-    # else:
-    #     messages.error(request, 'not post')
-    return render(request, 'main/register.html', {'form': form})
-
-
-# def return_language_form(request):
-#     form = LanguageForm(request.POST)
-#     if form.is_valid():
-#         form.save(coomit=True)
-#     return form
-
-
 def index(request):
-    # form = return_form(request)
-    # form = RegisterUser()
-    # if request.method == 'POST':
-    #     is_register = request.POST.get('register', False)
-    #     if is_register:
-    #         form = RegisterUser(request.POST)
-    #         if form.is_valid():
-    #             form.save(commit=True)
     latest_articles = Article.objects.filter(article_type="Cybersport").order_by('-publishing_date')[:10]
     return render(request, 'main/index.html', {'latest_articles': latest_articles})
 
 
-def cryptograph(request, cryptocurrency_name):
-    header = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'}
-    url = f'https://api.coingecko.com/api/v3/coins/{cryptocurrency_name}/history?date=20-05-2022&localization=en'
-    api_data = requests.get(url=url, headers=header).json()
-    api_data = []
-    for i in range(7):
-        now = datetime.datetime.now() - datetime.timedelta(days=i)
-        date = f"{now.day}-{now.month}-{now.year}"
-        url = f'https://api.coingecko.com/api/v3/coins/{cryptocurrency_name}/history?date={date}&localization=en'
-        api_data.append(requests.get(url=url).json())
-    return render(request, 'main/cryptograph.html',{'data': api_data})
-
-
 def it(request):
-    # form = return_form(request)
     latest_articles = Article.objects.filter(article_type="IT").order_by('-publishing_date')[:10]
     return render(request, 'main/it.html', {'latest_articles': latest_articles})
 
@@ -123,12 +25,10 @@ def detail(request, article_id):
         a = Article.objects.get(id=article_id)
     except:
         raise Http404("No Page was found!")
-    # form = return_form(request)
     return render(request, "main/detail.html", {'article': a})
 
 
 def crypto(request):
-    # form = return_form(request)
     header = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'}
     url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false'
@@ -138,21 +38,12 @@ def crypto(request):
 
 
 def compile(request):
-    # if request.user.is_authenticated:
-    #     test1 = request.user.username
-    # else:
-    #     test1 = "not authenticated"
-    # form = return_form(request)
     latest_codes = Code.objects.order_by('-publishing_date')[:10]
     if request.method == "POST":
         shared_code = request.POST.get('share_code', False)
         code = request.POST.get('code', False)
         submit = request.POST.get('submit_code', False)
-        # code = request.Post['code']
         language = request.POST.get('language_select', False)
-        # language2 = request.POST.get('nodejs', False)
-        # language3 = request.POST.get('python', False)
-        # language4 = request.POST.get('java', False)
         if submit and code:
             path = "https://api.jdoodle.com/v1/execute"
             params = {
@@ -182,18 +73,53 @@ def profile(request):
         return render(request, 'main/register.html', {'form': form})
 
 
-# def loginView(request):
-#     return render(request, 'main/login.html')
+def register(request):
+    form = RegisterUser()
+    if request.method == 'POST':
+        form = RegisterUser(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return render(request, 'main/profile.html')
+    return render(request, 'main/register.html', {'form': form})
 
 
-# def registerView(request):
-#     return render(request, 'main/register.html')
+def user_login(request):
+    message = ""
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(username=cd['username'], password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return render(request, 'main/profile.html')
+                else:
+                    message = "Disabled account"
+            else:
+                message = "Invalid login/password"
+    else:
+        form = LoginForm()
+    return render(request, 'main/login.html', {'form': form, 'message': message})
+
+
+def cryptograph(request, cryptocurrency_name):
+    header = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'}
+    url = f'https://api.coingecko.com/api/v3/coins/{cryptocurrency_name}/history?date=20-05-2022&localization=en'
+    api_data = requests.get(url=url, headers=header).json()
+    api_data = []
+    for i in range(7):
+        now = datetime.datetime.now() - datetime.timedelta(days=i)
+        date = f"{now.day}-{now.month}-{now.year}"
+        url = f'https://api.coingecko.com/api/v3/coins/{cryptocurrency_name}/history?date={date}&localization=en'
+        api_data.append(requests.get(url=url).json())
+    return render(request, 'main/cryptograph.html', {'data': api_data})
 
 
 # RU
 
 def indexru(request):
-    # form = RegisterUser()
     if request.method == 'POST':
         is_register = request.POST.get('register', False)
         if is_register:
@@ -205,7 +131,6 @@ def indexru(request):
 
 
 def itru(request):
-    # form = return_form(request)
     latest_articles = Article.objects.order_by('-publishing_date')[:10]
     return render(request, 'main/ru/itru.html', {'latest_articles': latest_articles})
 
@@ -215,35 +140,25 @@ def detailru(request, article_id):
         a = Article.objects.get(id=article_id)
     except:
         raise Http404("Страница не была найдена!")
-    # form = return_form(request)
     return render(request, "main/ru/detailru.html", {'article': a})
 
 
 def cryptoru(request):
-    # form = return_form(request)
-    api_data = requests.get(
-        'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false').json()
-    latest_articles = Article.objects.order_by('-publishing_date')[:10]
-    return render(request, 'main/ru/cryptoru.html',
-                  {'latest_articles': latest_articles, 'api_data': api_data})
+    header = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'}
+    url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false'
+    api_data = requests.get(url=url, headers=header).json()
+    latest_articles = Article.objects.filter(article_type="Cryptocurrency").order_by('-publishing_date')[:10]
+    return render(request, 'main/ru/cryptoru.html', {'latest_articles': latest_articles, 'api_data': api_data})
 
 
 def compileru(request):
-    # if request.user.is_authenticated:
-    #     test1 = request.user.username
-    # else:
-    #     test1 = "not authenticated"
-    # form = return_form(request)
     latest_codes = Code.objects.order_by('-publishing_date')[:10]
     if request.method == "POST":
         shared_code = request.POST.get('share_code', False)
         code = request.POST.get('code', False)
         submit = request.POST.get('submit_code', False)
-        # code = request.Post['code']
         language = request.POST.get('language_select', False)
-        # language2 = request.POST.get('nodejs', False)
-        # language3 = request.POST.get('python', False)
-        # language4 = request.POST.get('java', False)
         if submit and code:
             path = "https://api.jdoodle.com/v1/execute"
             params = {
@@ -255,11 +170,63 @@ def compileru(request):
                 "clientSecret": "8a188eb5edb8802a1b740a4dc0aceb2dc29439a1d0f3034c9be6ee404cddb6a7"
             }
             response = requests.post(path, headers={"Content-Type": "application/json"}, data=json.dumps(params))
-            return render(request, 'main/ru/compile.html',
+            return render(request, 'main/ru/compileru.html',
                           {'output': response.json(), 'user_code': code, 'latest_codes': latest_codes})
         if shared_code and code:
             new_code = Code(code=code, publishing_date=datetime.now())
             new_code.save()
             code = False
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    return render(request, 'main/ru/compile.html', {'latest_codes': latest_codes})
+    return render(request, 'main/ru/compileru.html', {'latest_codes': latest_codes})
+
+
+def profileru(request):
+    if request.user.is_authenticated:
+        return render(request, 'main/ru/profileru.html')
+    else:
+        form = RegisterUser()
+        return render(request, 'main/ru/registerru.html', {'form': form})
+
+
+def registerru(request):
+    form = RegisterUser()
+    if request.method == 'POST':
+        form = RegisterUser(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return render(request, 'main/ru/profileru.html')
+    return render(request, 'main/ru/registerru.html', {'form': form})
+
+
+def user_loginru(request):
+    message = ""
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(username=cd['username'], password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return render(request, 'main/ru/profileru.html')
+                else:
+                    message = "Отключенный Аккаунт"
+            else:
+                message = "Неправильный логин/пароль"
+    else:
+        form = LoginForm()
+    return render(request, 'main/ru/loginru.html', {'form': form, 'message': message})
+
+
+def cryptographru(request, cryptocurrency_name):
+    header = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'}
+    url = f'https://api.coingecko.com/api/v3/coins/{cryptocurrency_name}/history?date=20-05-2022&localization=en'
+    api_data = requests.get(url=url, headers=header).json()
+    api_data = []
+    for i in range(7):
+        now = datetime.datetime.now() - datetime.timedelta(days=i)
+        date = f"{now.day}-{now.month}-{now.year}"
+        url = f'https://api.coingecko.com/api/v3/coins/{cryptocurrency_name}/history?date={date}&localization=en'
+        api_data.append(requests.get(url=url).json())
+    return render(request, 'main/ru/cryptographru.html', {'data': api_data})
