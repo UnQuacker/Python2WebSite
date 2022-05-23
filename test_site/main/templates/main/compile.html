@@ -13,49 +13,15 @@
             <option value= "python3">python</option>
             <option value="java">java</option>
         </select>
-<!--        <p>{{test1}}</p>-->
 
-<!--        <p>Chosen language: {{test}}</p>-->
-<!--        <p>{{test1}} {{test2}} {{test3}}</p>-->
-<!--        {% if not test %}-->
-<!--        <p>Quack, failed test0</p>-->
-<!--        {% if not test1%}-->
-<!--        <p>Quack, failed test1</p>-->
-<!--        {% if not test2%}-->
-<!--        <p>Quack, failed test2</p>-->
-<!--        {% if not test3%}-->
-<!--        <p>Quack, failed test3</p>-->
-<!--        {% endif %}-->
-<!--        {% endif %}-->
-<!--        {% endif %}-->
-<!--        {% endif %}-->
-<!--        <button class="btn" type="submit" value="nodejs">select</button>-->
 </div>
 
 <div class="coding">
-<!--<form action = "{% url 'main:compile' %}" method="POST">-->
-<!--    {% csrf_token %}-->
-<!--    <h4>Input</h4><textarea class="form-control" type="text" cols = 80 rows = 20 name="code">{{user_code}}</textarea>-->
-<!--        <div class="buttons">-->
-<!--&lt;!&ndash;            <input type="submit" name="update_button" value="Update" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="input" name="code">&ndash;&gt;-->
-<!--            <button class="btn" type="submit" name="code">submit code</button>-->
-<!--&lt;!&ndash;                <input type="submit" name="code" value="submit code">&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="input" name="shared_code">&ndash;&gt;-->
-<!--            <button class="btn" type="submit" name="shared_code">share code</button>-->
-<!--&lt;!&ndash;                <input type="submit" name="shared_code" value="submit code">&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--    </div>-->
-<!--</form>-->
-<!--    <form action = "{% url 'main:compile' %}" method="POST">-->
     {% csrf_token %}
     <div class="input" ><h4>Input</h4><textarea class="form-control" name="code" cols = 80 rows = 20 >{{user_code}}</textarea>
         <div class="buttons">
             <button class="btn" type="submit" name="submit_code" value="submit_code">submit code</button>
             <button class="btn" type="submit" name="share_code" value="share_code">share code</button>
-<!--            <input type="button" name="submit">-->
-<!--            <input type="button" name="shared_code">-->
         </div>
     </div>
 
@@ -65,7 +31,6 @@
     <p>Status Code: {{output.statusCode}}</p>
     <p>CPU time: {{output.cpuTime}}</p>
     <p>{{output.error}}</p>
-<!--    <p>{{test}}</p>-->
 
 </div>
 </div>
@@ -77,12 +42,10 @@
     {% if latest_codes %}
     {% for code in latest_codes %}
     <div class="share">
-<!--        <form action="">-->
             <h4>Author:</h4>
             <textarea class="form-control" type="text" cols = 80 rows = 20 >{{code.code}}
                 </textarea>
                 <button class="btn" type="submit"></button></div>
-<!--        </form>-->
     {% endfor %}
     {% endif %}
     </div>
@@ -94,4 +57,3 @@
 
 
 
-<!--test-->

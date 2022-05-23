@@ -7,12 +7,6 @@
     <form method="POST" action = "{% url 'main:login' %}">
       {% csrf_token %}
       <div class="login">
-<!--          <p>Username:</p>-->
-<!--          <input type="text" name="username">-->
-<!--&lt;!&ndash;                      {{form.username}}&ndash;&gt;-->
-<!--          <p>Password:</p>-->
-<!--          <input type="password" name="password1">-->
-<!--&lt;!&ndash;                      {{form.password1}}&ndash;&gt;-->
           {{ form.as_p }}
         <p>{{message}}</p>
           <button class="btn" type="submit">Sign up</button>

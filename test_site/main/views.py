@@ -1,10 +1,8 @@
 import json
 import datetime
 import requests
-from django.shortcuts import render, redirect
-from django.http import Http404, HttpResponseRedirect, HttpResponse
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
+from django.shortcuts import render
+from django.http import Http404, HttpResponseRedirect
 from .forms import RegisterUser, LoginForm
 from .models import Article, Code
 from django.contrib.auth import authenticate, login
