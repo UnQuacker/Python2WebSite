@@ -11,6 +11,7 @@ body{
     color:black;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
+    background-color:#dbd0ca ;
 }
 a{
     color: black;
@@ -25,7 +26,7 @@ nav{
     padding: 10%;
     padding-top: 0;
     padding-bottom: 0;
-    background-color: beige;
+    background-color:#dbd0ca ;
     box-shadow:0 1px grey;
     
 }
@@ -50,7 +51,7 @@ div.container h2{
 div.pin{
     display: flex;
     margin:10px auto;
-    background-color:beige ;
+    background-color:#dbd0ca ;
     padding:10px;
     filter: drop-shadow(0 1px 1px black)
 }
@@ -69,7 +70,7 @@ div.pin p{
 }
 div.compiler{
     display: flex;
-    background-color: beige;
+    background-color:#dbd0ca ;
     filter: drop-shadow(0 1px 1px black);
     margin: 10px auto;
     flex-direction: column;
@@ -89,7 +90,7 @@ div.share{
 div.share{
     display: flex;
     margin:10px auto;
-    background-color:beige ;
+    background-color:#dbd0ca ;
     padding:10px;
     filter: drop-shadow(0 1px 1px black);
     justify-content: center;
@@ -114,7 +115,7 @@ div.crcarr{
 div.crc{
     display: flex;
     flex-direction:column;
-    background-color:beige ;
+    background-color:#dbd0ca ;
     padding: 5px;
     margin: 5px;
     width: 250px;
@@ -129,7 +130,7 @@ div.profile{
     width: 60%;
     height: 400px;
     flex-direction: column;
-    background-color: beige;
+    background-color:#dbd0ca ;
     justify-content: flex-end;
     align-content: center;
     align-items: center;
