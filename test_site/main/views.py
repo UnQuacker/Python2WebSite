@@ -56,7 +56,7 @@ def compile(request):
             return render(request, 'main/compile.html',
                           {'output': response.json(), 'user_code': code, 'latest_codes': latest_codes})
         if shared_code and code:
-            new_code = Code(code=code, publishing_date=datetime.now())
+            new_code = Code(code=code, publishing_date=datetime.datetime.now())
             new_code.save()
             code = False
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -102,10 +102,6 @@ def user_login(request):
 
 
 def cryptograph(request, cryptocurrency_name):
-    header = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'}
-    url = f'https://api.coingecko.com/api/v3/coins/{cryptocurrency_name}/history?date=20-05-2022&localization=en'
-    api_data = requests.get(url=url, headers=header).json()
     api_data = []
     for i in range(7):
         now = datetime.datetime.now() - datetime.timedelta(days=i)
@@ -171,7 +167,7 @@ def compileru(request):
             return render(request, 'main/ru/compileru.html',
                           {'output': response.json(), 'user_code': code, 'latest_codes': latest_codes})
         if shared_code and code:
-            new_code = Code(code=code, publishing_date=datetime.now())
+            new_code = Code(code=code, publishing_date=datetime.date.today())
             new_code.save()
             code = False
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -217,10 +213,6 @@ def user_loginru(request):
 
 
 def cryptographru(request, cryptocurrency_name):
-    header = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'}
-    url = f'https://api.coingecko.com/api/v3/coins/{cryptocurrency_name}/history?date=20-05-2022&localization=en'
-    api_data = requests.get(url=url, headers=header).json()
     api_data = []
     for i in range(7):
         now = datetime.datetime.now() - datetime.timedelta(days=i)

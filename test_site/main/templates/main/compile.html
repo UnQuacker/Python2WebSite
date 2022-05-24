@@ -27,7 +27,7 @@
 
 
 <div class="output"><h4>Output</h4><textarea class="form-control" cols = 80 rows = 20>{{output.output}}</textarea>
-
+    {% csrf_token %}
     <p>Status Code: {{output.statusCode}}</p>
     <p>CPU time: {{output.cpuTime}}</p>
     <p>{{output.error}}</p>
